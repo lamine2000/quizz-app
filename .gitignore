@@ -4,11 +4,15 @@
 /dist
 /tmp
 /out-tsc
+app/**/*.js
+app/**/*.js.map
 # Only exists if Bazel was run
 /bazel-out
 
 # dependencies
 /node_modules
+**/node_modules/*
+**/.firebaserc
 
 # profiling files
 chrome-profiler-events*.json
@@ -43,3 +47,15 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# dependencies
+node_modules/
+bower_components/
+
+# e2e
+e2e/*.js
+e2e/*.map
+
+### Firebase Patch ###
+.runtimeconfig.json
+/.firebase
