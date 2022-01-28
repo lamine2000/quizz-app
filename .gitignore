@@ -59,3 +59,7 @@ e2e/*.map
 ### Firebase Patch ###
 .runtimeconfig.json
 /.firebase
+
+#keyws
+**/environments
+**/environments/*
