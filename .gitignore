@@ -60,6 +60,9 @@ e2e/*.map
 .runtimeconfig.json
 /.firebase
 
-#keyws
+#keys
 **/environments
 **/environments/*
+
+#Hosting
+public/
