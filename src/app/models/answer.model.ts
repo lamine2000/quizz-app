@@ -1,6 +1,7 @@
 export class Answer{
   constructor(
+    public id: string,
     public text: string,
-    public image: string
+    public imageUrl: string
   ){}
 }

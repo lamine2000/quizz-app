@@ -5,6 +5,6 @@ export class Question{
     public id: string,
     public text: string,
     public answers: Answer[],
-    public correctAnswer: number
+    public correctAnswerId: string
   ){}
 }
