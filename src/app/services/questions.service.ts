@@ -28,7 +28,6 @@ export class QuestionsService {
           quizz_doc_ref.collection(`questions`).add(
             {
               text: question.text,
-              answers: question.answers,
               correctAnswerId: question.correctAnswerId
             }
           )
@@ -41,10 +40,13 @@ export class QuestionsService {
                     text: answer.text,
                     imageUrl: answer.imageUrl
                   }
-                );
+                )
+                  .then(() => {
+                    /*quizz created on firesotore*/
+                  });
               });
             }
-          );
+            );
         });
       });
   }
@@ -65,7 +67,6 @@ export class QuestionsService {
             this.firestore.collection(`quizzies/${quizz_id}/questions`).add(
               {
                 text: question.text,
-                answers: question.answers,
                 correctAnswerId: question.correctAnswerId
               }
             )
@@ -78,7 +79,10 @@ export class QuestionsService {
                         text: answer.text,
                         imageUrl: answer.imageUrl
                       }
-                    );
+                    )
+                      .then(() => {
+                        /*quizz created on firesotore*/
+                      });
                   });
                 }
               );
@@ -99,7 +103,7 @@ export class QuestionsService {
       });
   }
 
-  addQuestion(question: Question, quizz_id: string) : Promise<DocumentReference<unknown>> {
+  addQuestionToQuizz(question: Question, quizz_id: string) : Promise<DocumentReference<unknown>> {
     return this.firestore.collection(`quizzes/${quizz_id}/questions`).add({
       text: question.text,
       answers: question.answers,
@@ -107,7 +111,7 @@ export class QuestionsService {
     });
   }
 
-  addQuestionById(question: Question, question_id: string, quizz_id: string): Promise<void>{
+  addQuestionToQuizzById(question: Question, question_id: string, quizz_id: string): Promise<void>{
     return this.firestore.doc(`quizzes/${quizz_id}/questions/${question_id}`).set({
       id: question_id,
       text: question.text,
@@ -116,45 +120,93 @@ export class QuestionsService {
     });
   }
 
-  removeQuestion(question_id: string, quizz_id: string): Promise<void> {
+  removeQuestionFromQuizz(question_id: string, quizz_id: string): Promise<void> {
     return this.firestore.doc(`quizzies/${quizz_id}/questions/${question_id}`).delete();
   }
 
   modifyQuestion(question: Question, question_id: string, quizz_id: string): Promise<void> {
-    return this.removeQuestion(question_id, quizz_id)
+    return this.removeQuestionFromQuizz(question_id, quizz_id)
       .then(() => {
-        this.addQuestionById(question, question_id, quizz_id);
+        this.addQuestionToQuizzById(question, question_id, quizz_id).then(() => {
+          /*modification done*/
+        });
       });
   }
 
-  addAnswerToQuestion(answer: Answer, question_index: number, quizz_id: string): void {
-
+  addAnswerToQuestion(answer: Answer, question_id: string, quizz_id: string): Promise<DocumentReference<unknown>> {
+    return this.firestore.collection(`quizzies/${quizz_id}/questions/${question_id}/answers`).add({
+      text: answer.text,
+      imageUrl: answer.imageUrl
+    });
   }
 
-  removeAnswerFromQuestion(answer_index: number, question_index: number, quizz_id: string): void{
-
+  addAnswerToQuestionById(answer: Answer, answer_id: string, question_id: string, quizz_id: string): Promise<void>{
+    return this.firestore.doc(`quizzies/${quizz_id}/questions/${question_id}/answers/${answer_id}`).set({
+      id: answer_id,
+      text: answer.text,
+      imageUrl: answer.imageUrl
+    });
   }
 
-  modifyAnswerOfQuestion(answer: Answer, answer_index: number, question_index: number, quizz_id: string): void {
-
+  removeAnswerFromQuestion(answer_id: string, question_id: string, quizz_id: string): Promise<void>{
+    return this.firestore.doc(`quizzies/${quizz_id}/questions/${question_id}/answers/${answer_id}`).delete();
   }
 
-  retrieveAnswersFromQuestion(question_index: number, quizz_id: string): void{
-
+  modifyAnswerOfQuestion(answer: Answer, answer_id: string, question_id: string, quizz_id: string): Promise<void> {
+    return this.removeAnswerFromQuestion(answer_id, question_id, quizz_id)
+      .then(() => {
+        this.addAnswerToQuestionById(answer, answer_id, question_id, quizz_id).then(() => {
+          /*modification done*/
+        });
+      });
   }
 
-  retrieveQuestionsFromQuizz(quizz_id: string): void{
+  retrieveAnswersFromQuestion(question_id: string, quizz_id: string): Answer[] | void{
+    let tab_answers: Answer[] = [];
 
+    this.firestore.collection(`quizzies/${quizz_id}/questions/${question_id}/answers`).get()
+      .subscribe(answers => {
+        answers.forEach((answer) => {
+          // @ts-ignore
+          tab_answers.push(new Answer(answer.id, answer.data().text, answer.data().imageUrl));
+        })
+      },
+      () => {},
+        () => {return tab_answers;}
+      );
+  }
+
+  retrieveQuestionsFromQuizz(quizz_id: string): Question[] | void{
+    let tab_questions: Question[] = [];
+
+    this.firestore.collection(`quizzies/${quizz_id}/questions`).get()
+      .subscribe(questions => {
+        questions.forEach(question => {
+          let answers = this.retrieveAnswersFromQuestion(question.id, quizz_id);
+          tab_questions.push(
+            // @ts-ignore
+            new Question(question.id, question.data().text, answers, question.data().correctAnswerId)
+          );
+        });
+      },
+      () => {},
+      () => {return tab_questions;}
+      );
   }
 
   // @ts-ignore
-  getQuizzById(quizz_id: string): Question{
+  retrieveQuizzById(quizz_id: string): Quizz{
+    let questions = this.retrieveQuestionsFromQuizz(quizz_id);
+    let retieved_quizz: Quizz;
 
+    this.firestore.doc(`quizzies/${quizz_id}`).get()
+      .subscribe(
+        quizz => {
+        // @ts-ignore
+        retieved_quizz = new Quizz(quizz_id, quizz.data().nb_players, quizz.data().max_score, questions);
+      },
+        () => {},
+        () => {return retieved_quizz;}
+        );
   }
-
-
 }
-
-//todo: CRUD for Questions of an already existing quizz
-//todo: Upload a quizz on firestore
-
