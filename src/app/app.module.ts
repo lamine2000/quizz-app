@@ -12,8 +12,10 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {QuestionsService} from "./services/questions.service";
-import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
 
 const appRoutes = [
   {path: '', component:CreateQuizzComponent},
@@ -30,7 +32,6 @@ const appRoutes = [
     EditQuizzComponent,
     QuizzComponent,
     FourOFourComponent,
-    NavbarComponent,
     FooterComponent
   ],
   imports: [
@@ -39,7 +40,10 @@ const appRoutes = [
     RouterModule.forRoot(appRoutes),
 
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
   ],
   providers: [
     QuestionsService
