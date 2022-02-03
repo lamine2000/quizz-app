@@ -1,1 +1,25 @@
-<p>create-quizz works!</p>
+<div class="page">
+
+  <h3>Nouveau Quizz</h3>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Identifiant de quizz</mat-label>
+    <input matInput placeholder="Nom du quizz">
+    <mat-icon matSuffix>loyalty</mat-icon>
+    <mat-hint>Optionnel (si non spécifié, un identifiant est autogénéré)</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Score maximal</mat-label>
+    <input matInput type="number" placeholder="Score gagnant">
+    <mat-icon matSuffix>assistant_photo</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Points/Question</mat-label>
+    <input matInput type="number" placeholder="Valeur par défaut">
+    <mat-icon matSuffix>score</mat-icon>
+  </mat-form-field>
+
+</div>
+
