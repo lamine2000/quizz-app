@@ -12,6 +12,8 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {QuestionsService} from "./services/questions.service";
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes = [
   {path: '', component:CreateQuizzComponent},
@@ -27,7 +29,9 @@ const appRoutes = [
     CreateQuizzComponent,
     EditQuizzComponent,
     QuizzComponent,
-    FourOFourComponent
+    FourOFourComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
