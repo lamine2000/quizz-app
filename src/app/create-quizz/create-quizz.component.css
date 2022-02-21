@@ -1,7 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 .page{
   height: 100vh;
   margin: 0 0 0 0;
   background: #654ea3;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container{
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  color: #d54d7b;
+  line-height: 10rem;
+  text-shadow: 0 15px 7px rgba(0, 0, 0, 0.5);
+  margin-bottom: 5%;
+  font-size: 7rem;
+  font-weight: normal;
+  font-family: "Great Vibes", cursive;
+  text-align: center;
+  display: inline-block;
+}
+
+.type-out{
+  height: 10.4rem;
+  overflow: hidden;
+  border-right: .08em solid orange;
+  animation:
+    typing 3s steps(20, end) infinite,
+    blink .7s infinite ease-in-out;
+  white-space: nowrap;
+  width: 0;
+}
+
+@keyframes typing{
+  50%, 100%{ width: 100% }
+  0%{ width: 0 }
+ }
+
+@keyframes blink {
+  from { border-color: transparent }
+  to { border-color: orange; }
 }
