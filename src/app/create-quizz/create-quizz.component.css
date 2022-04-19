@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
-.page{
-  height: 100vh;
-  margin: 0 0 0 0;
-  background: #654ea3;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.body{
+  background-image: linear-gradient(to top, #52063f 0%, #122f5f 100%);
+}
+
+::selection {
+  background: #A1E0FF;
+  color: white;
+}
+
+.body {
+  overflow-x: hidden
 }
 
 .container{
@@ -21,7 +26,7 @@
   font-size: 7rem;
   font-weight: normal;
   font-family: "Great Vibes", cursive;
-  text-align: center;
+  text-align: right;
   display: inline-block;
 }
 
@@ -39,7 +44,7 @@
 @keyframes typing{
   50%, 100%{ width: 100% }
   0%{ width: 0 }
- }
+}
 
 @keyframes blink {
   from { border-color: transparent }

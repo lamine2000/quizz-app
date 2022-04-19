@@ -1,0 +1,51 @@
+::selection {
+  background: #A1E0FF;
+  color: white;
+}
+
+.cursorblue,
+.cursorpink,
+.cursorcms,
+.cursorblue-02 {
+  transition: transform 0.3s ease-out;
+}
+
+.body {
+  overflow-x: hidden
+}
+
+.menu-line-top, .menu-line-bottom, .menu-text-element{
+  -webkit-transform:
+    translate3d(0, 0px, 0)
+    scale3d(1, 1, 1)
+    rotateX(0)
+    rotateY(0)
+    rotateZ(0deg)
+    skew(0, 0);
+
+  -moz-transform:
+    translate3d(0, 0px, 0)
+    scale3d(1, 1, 1)
+    rotateX(0)
+    rotateY(0)
+    rotateZ(0deg)
+    skew(0, 0);
+
+  -ms-transform:
+    translate3d(0, 0px, 0)
+    scale3d(1, 1, 1)
+    rotateX(0)
+    rotateY(0)
+    rotateZ(0deg)
+    skew(0, 0);
+
+  transform:
+    translate3d(0, 0px, 0)
+    scale3d(1, 1, 1)
+    rotateX(0)
+    rotateY(0)
+    rotateZ(0deg)
+    skew(0, 0);
+
+  background-color:rgb(255,255,255);
+}
