@@ -1,52 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-
-.body{
-  background-image: linear-gradient(to top, #52063f 0%, #122f5f 100%);
-}
-
-::selection {
-  background: #A1E0FF;
+.wave{
+  width: 100%;
+  height: 99vh;
+  backdrop-filter: blur(150px);
   color: white;
 }
 
-.body {
-  overflow-x: hidden
+g{
+  transform: translate(425px, -6px);
 }
 
-.container{
-  width: 100%;
-  text-align: center;
+g path{
+  fill: white;
 }
 
-.title {
-  color: #d54d7b;
-  line-height: 10rem;
-  text-shadow: 0 15px 7px rgba(0, 0, 0, 0.5);
-  margin-bottom: 5%;
-  font-size: 7rem;
-  font-weight: normal;
-  font-family: "Great Vibes", cursive;
-  text-align: right;
-  display: inline-block;
+.in-wave{
+  position: absolute;
+  top: 20%;
+  right: 0;
+  width: 30%;
 }
 
-.type-out{
-  height: 10.4rem;
-  overflow: hidden;
-  border-right: .08em solid orange;
-  animation:
-    typing 3s steps(20, end) infinite,
-    blink .7s infinite ease-in-out;
-  white-space: nowrap;
-  width: 0;
-}
-
-@keyframes typing{
-  50%, 100%{ width: 100% }
-  0%{ width: 0 }
-}
-
-@keyframes blink {
-  from { border-color: transparent }
-  to { border-color: orange; }
+.in-wave p{
+  color: #4B16C3;
 }
